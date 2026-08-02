@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseNotFound
 
 from django.shortcuts import render
 
@@ -8,8 +8,13 @@ def home_page(request):
 def blogposts(request):
     return  HttpResponse("all blog posts!")
 
-def python_intro(request):
-    return HttpResponse("python posts!")
 
-def django_basics(request):
-    return HttpResponse("Django blog posts!")
+def blog_post(request, blog):
+    if blog=='python-intro':
+        res = "python blog posts!"
+    elif blog=='django-basics':
+        res = "django blog posts!"
+    else:
+        return HttpResponseNotFound('Blog not found')
+
+    return HttpResponse(res)
