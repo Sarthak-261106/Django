@@ -20,4 +20,4 @@ def blog_post(request, blog):
     return HttpResponse(res)
 
 def blog_post_by_number(request, blog):
-    return HttpResponse(blog)
+    return HttpResponse(blog)  
