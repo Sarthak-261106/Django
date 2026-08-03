@@ -1,4 +1,5 @@
 from django.http import HttpResponse,HttpResponseNotFound
+from django.urls import reverse
 
 from django.shortcuts import render
 
@@ -11,14 +12,14 @@ def home_page(request):
 
 
 def blogposts(request):
-    res_data="""
-    <u1>
-        <li><a href="allposts/python-intro">Python Intro</a></li>
-        <li><a href="allposts/django-basics">Django basics</a></li>
-        <li><a href="allposts/regex">REGEX</a></li>
-        
-    </u1>
-    """
+    list_items=''
+    blog_list=list(blog_names.keys())
+    for b in blog_list:
+        blog_path=reverse('blog-post',args=[b])
+        list_items+=f'<li><a href="{blog_path}">{b.capitalize()}</a></li>'
+
+
+    res_data=f"<ul>{list_items}</ul>"
     return  HttpResponse(res_data)
 
 
