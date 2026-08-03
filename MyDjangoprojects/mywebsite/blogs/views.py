@@ -11,7 +11,15 @@ def home_page(request):
 
 
 def blogposts(request):
-    return  HttpResponse("all blog posts!")
+    res_data="""
+    <u1>
+        <li><a href="allposts/python-intro">Python Intro</a></li>
+        <li><a href="allposts/django-basics">Django basics</a></li>
+        <li><a href="allposts/regex">REGEX</a></li>
+        
+    </u1>
+    """
+    return  HttpResponse(res_data)
 
 
 def blog_post(request, blog):
