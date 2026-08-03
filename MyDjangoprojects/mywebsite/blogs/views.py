@@ -18,3 +18,6 @@ def blog_post(request, blog):
         return HttpResponseNotFound('Blog not found')
 
     return HttpResponse(res)
+
+def blog_post_by_number(request, blog):
+    return HttpResponse(blog)
