@@ -8,8 +8,9 @@ from django.shortcuts import render
 blog_names={'python-intro':"python blog posts!",'django-basics':"django blog posts!",'regex':'regular expressions'}
 
 def home_page(request):
-    res_data=render_to_string("blogs/index.html")
-    return HttpResponse(res_data)
+    return render(request,'blogs/index.html')
+    # res_data=render_to_string("blogs/index.html")
+    # return HttpResponse(res_data)
 
 
 def blogposts(request):
