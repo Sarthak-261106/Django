@@ -1,6 +1,6 @@
 from django.http import HttpResponse,HttpResponseNotFound
 from django.urls import reverse
-
+from django.template.loader import render_to_string
 from django.shortcuts import render
 
 # Create your views here.
@@ -8,7 +8,8 @@ from django.shortcuts import render
 blog_names={'python-intro':"python blog posts!",'django-basics':"django blog posts!",'regex':'regular expressions'}
 
 def home_page(request):
-    return HttpResponse("<h1>Home page of website blog</h1>")
+    res_data=render_to_string("blogs/index.html")
+    return HttpResponse(res_data)
 
 
 def blogposts(request):
