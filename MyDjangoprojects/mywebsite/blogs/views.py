@@ -33,10 +33,11 @@ def blog_post(request, blog):
     # else:
     try:
         res=blog_names[blog]
+        return render(request,'blogs/posts.html',{"blog_text":res})
     except Exception:
         return HttpResponseNotFound('Blog not found')
-    else:
-        return HttpResponse(res)
+    # else:
+    #     return HttpResponse(res)
 
 def blog_post_by_number(request, blog):
     return HttpResponse(blog)
