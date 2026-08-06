@@ -26,7 +26,7 @@ def blogposts(request):
 
 def process_blog_name(blog):
     blog_list=blog.split("-")
-    return " ".join(blog_list).title()
+    return " ".join(blog_list)
 
 
 def blog_post(request, blog):
