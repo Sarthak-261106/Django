@@ -7,6 +7,11 @@
 </head>
 <body>
 <h1>{{blog_name|title}} blog post</h1>
+{% if blog_text %}
 <h2>{{blog_text}}</h2>
+{% else %}
+<h2>Blog is in progress....</h2>
+{% endif %}
+
 </body>
 </html>

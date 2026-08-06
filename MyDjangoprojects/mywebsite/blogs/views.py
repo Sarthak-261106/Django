@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-blog_names={'python-intro':"python blog posts!",'django-basics':"django blog posts!",'regex':'regular expressions'}
+blog_names={'python-intro':"python blog posts!",'django-basics':"django blog posts!",'regex':'regular expressions','tkinter': None}
 
 def home_page(request):
     return render(request,'blogs/index.html')
