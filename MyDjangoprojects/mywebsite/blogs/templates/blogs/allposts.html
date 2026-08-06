@@ -8,7 +8,7 @@
 <body>
 <ul>
     {% for blog in blogs %}
-    <li><a href="">{{blog|capfirst}}</a></li>
+    <li><a href="{% url 'blog-post' blog %}">{{blog|capfirst}}</a></li>
     {% endfor %}
 </ul>
 </body>
