@@ -24,6 +24,10 @@ def blogposts(request):
     res_data=f"<ul>{list_items}</ul>"
     return  HttpResponse(res_data)
 
+def process_blog_name(blog):
+    blog_list=blog.split("-")
+    return " ".join(blog_list).title()
+
 
 def blog_post(request, blog):
     # if blog=='python-intro':
@@ -33,7 +37,7 @@ def blog_post(request, blog):
     # else:
     try:
         res=blog_names[blog]
-        return render(request,'blogs/posts.html',{"blog_text":res})
+        return render(request,'blogs/posts.html',{"blog_text":res,'blog_name':process_blog_name(blog)})
     except Exception:
         return HttpResponseNotFound('Blog not found')
     # else:
