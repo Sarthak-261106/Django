@@ -14,15 +14,15 @@ def home_page(request):
 
 
 def blogposts(request):
-    list_items=''
+    # list_items=''
     blog_list=list(blog_names.keys())
-    for b in blog_list:
-        blog_path=reverse('blog-post',args=[b])
-        list_items+=f'<li><a href="{blog_path}">{b.capitalize()}</a></li>'
 
-
-    res_data=f"<ul>{list_items}</ul>"
-    return  HttpResponse(res_data)
+    return render(request,'blogs/allposts.html',{'blogs':blog_list})
+    # for b in blog_list:
+    #     blog_path=reverse('blog-post',args=[b])
+    #     list_items+=f'<li><a href="{blog_path}">{b.capitalize()}</a></li>'
+    #     res_data=f"<ul>{list_items}</ul>"
+    #     return  HttpResponse(res_data)
 
 def process_blog_name(blog):
     blog_list=blog.split("-")
