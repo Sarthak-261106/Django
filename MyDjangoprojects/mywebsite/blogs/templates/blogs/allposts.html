@@ -6,6 +6,12 @@ All posts
 
 
 {% block body_content %}
+<header>
+    <nav>
+        <a href="">Home Page</a>
+    </nav>
+</header>
+
 <ul>
     {% for blog in blogs %}
     <li><a href="{% url 'blog-post' blog %}">{{blog|capfirst}}</a></li>
