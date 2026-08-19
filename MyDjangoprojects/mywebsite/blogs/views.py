@@ -1,4 +1,4 @@
-from django.http import HttpResponse,HttpResponseNotFound
+from django.http import HttpResponse,HttpResponseNotFound,Http404
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.shortcuts import render
@@ -39,7 +39,10 @@ def blog_post(request, blog):
         res=blog_names[blog]
         return render(request,'blogs/posts.html',{"blog_text":res,'blog_name':process_blog_name(blog)})
     except Exception:
-        return HttpResponseNotFound('Blog not found')
+        res_data=render_to_string("404.html")
+        #raise Http404()
+       
+
     # else:
     #     return HttpResponse(res)
 
