@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block body_content %}
-<header>
-    <nav>
-        <a href="">Home Page</a>
-    </nav>
-</header>
+{% include "blogs/includes/header.html" with active_page="Posts" %}
 <h1>{{blog_name|title}} blog post</h1>
 {% if blog_text %}
 <h2>{{blog_text}}</h2>
