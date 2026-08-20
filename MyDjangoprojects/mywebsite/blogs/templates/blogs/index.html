@@ -10,18 +10,13 @@ Our blog post home page
 {% endblock %}
 
 {% block body_content %}
-<header>
-     <h1><a href="">Home Page</a></h1>
-     <nav>
-          <a href="">All Posts</a>
-     </nav>
-</header>
+
 <!--{% include "blogs/includes/header.html" %}-->
 <section>
      <header>
           <h1>My personal blog post</h1>
           <h2>I write about python </h2>
-          <img src="" alt="Author"/>
+          <img src="{% static 'blogs/images/image.jpg' %}" alt="Author"/>
      </header>
 
 </section>
@@ -32,7 +27,7 @@ Our blog post home page
           <li>
                <article>
                     <a href="">
-                         <img src="" alt="python"/>
+                         <img src="{% static 'blogs/images/image2.jpg' %}" alt="python"/>
                          <div>
                               <h3>Python Intro</h3>
                               <p>Python is a high level programming language.</p>
@@ -43,7 +38,7 @@ Our blog post home page
           <li>
                <article>
                     <a href="">
-                         <img src="" alt="django"/>
+                         <img src="{% static 'blogs/images/images.jpg' %}" alt="django"/>
                          <div>
                               <h3>Django Basics</h3>
                               <p>Django is web framework in python.</p>
