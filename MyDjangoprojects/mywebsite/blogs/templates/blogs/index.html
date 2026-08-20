@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blogs/app.css' %}">
+{% endblock %}
 
 
 {% block page_title %}
@@ -48,5 +52,11 @@ Our blog post home page
                </article>
           </li>
      </ul>
+</section>
+
+<section>
+     <h2>About the author.</h2>
+     <p>The author is learning python and will secure a good placement.</p>
+     <p>Contact me on anywhere</p>
 </section>
 {% endblock %}
