@@ -6,7 +6,47 @@ Our blog post home page
 {% endblock %}
 
 {% block body_content %}
-{% include "blogs/includes/header.html" %}
-     <h1>My personal blog post</h1>
-     <h2>I write about python </h2>
+<header>
+     <h1><a href="">Home Page</a></h1>
+     <nav>
+          <a href="">All Posts</a>
+     </nav>
+</header>
+<!--{% include "blogs/includes/header.html" %}-->
+<section>
+     <header>
+          <h1>My personal blog post</h1>
+          <h2>I write about python </h2>
+          <img src="" alt="Author"/>
+     </header>
+
+</section>
+
+<section>
+     <h2>Featured posts</h2>
+     <ul>
+          <li>
+               <article>
+                    <a href="">
+                         <img src="" alt="python"/>
+                         <div>
+                              <h3>Python Intro</h3>
+                              <p>Python is a high level programming language.</p>
+                         </div>
+                    </a>
+               </article>
+          </li>
+          <li>
+               <article>
+                    <a href="">
+                         <img src="" alt="django"/>
+                         <div>
+                              <h3>Django Basics</h3>
+                              <p>Django is web framework in python.</p>
+                         </div>
+                    </a>
+               </article>
+          </li>
+     </ul>
+</section>
 {% endblock %}
