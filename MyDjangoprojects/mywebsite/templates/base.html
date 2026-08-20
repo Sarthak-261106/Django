@@ -9,8 +9,16 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     {% block css_files %}{% endblock %}
 </head>
+<header>
+    <nav>
+        <h1><a href="{% url 'home' %}">Home Page</a></h1>
+         <a href="{% url 'allposts' %}">All Posts</a>
+    </nav>
+</header>
 <body>
 {% block body_content %}
+
+
 
 {% endblock %}
 </body>

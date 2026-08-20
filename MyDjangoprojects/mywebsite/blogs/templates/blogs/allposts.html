@@ -11,10 +11,21 @@ All posts
 
 
 {% block body_content %}
-{% include "blogs/includes/header.html" with active_page="All Post"%}
+<section>
+    <h2>ALL MY POSTS!!!!!</h2>
 <ul>
     {% for blog in blogs %}
-    <li><a href="{% url 'blog-post' blog %}">{{blog|capfirst}}</a></li>
+    <li>
+        <article>
+            <a href="{% url 'blog-post' blog=blog %}">{{blog|capfirst}}</a>
+            <img src="{% static 'blogs/images/1234.webp' %}" alt="Allposts"/>
+            <div>
+                <p>Python is a high level programming language.</p>
+            </div>
+        </article>
+    </li>
     {% endfor %}
+
 </ul>
+    </section>
 {% endblock %}
