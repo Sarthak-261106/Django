@@ -1,14 +1,27 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block page_title %}
-{{blog_name|title}}
+{{ post.title }}
 {% endblock %}
 
 {% block body_content %}
-<h1>{{blog_name|title}} blog post</h1>
-{% if blog_text %}
-<h2>{{blog_text}}</h2>
-{% else %}
-<h2>Blog is in progress....</h2>
-{% endif %}
+<section>
+    <h2>{{ post.title }}</h2>
+    <article>
+        <img src="{% static 'blogs/images/'|add:post.image %}" alt="{{ post.title }}"/>
+        <div>Posted on <time>{{ post.date|date:"d M Y" }}</time></div>
+    </article>
+</section>
+
+<main>
+    <p>{{ post.content }}</p>
+</main>
+
+
+<!--<h1>{{blog_name|title}} blog post</h1>-->
+<!--{% if blog_text %}-->
+<!--<h2>{{blog_text}}</h2>-->
+<!--{% else %}-->
+<!--<h2>Blog is in progress....</h2>-->
+<!--{% endif %}-->
 {% endblock %}

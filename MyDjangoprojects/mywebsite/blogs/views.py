@@ -94,6 +94,12 @@ def process_blog_name(blog):
     blog_list=blog.split("-")
     return " ".join(blog_list)
 
+def get_blog_by_slug(blog_url):
+    for blog in blog_details:
+        if blog['slug']==blog_url:
+            return blog
+    return None
+
 
 def blog_post(request, blog):
     # if blog=='python-intro':
@@ -102,8 +108,8 @@ def blog_post(request, blog):
     #     res = "django blog posts!"
     # else:
     try:
-        res=blog_details[blog]
-        return render(request,'blogs/posts.html',{"blog_text":res,'blog_name':process_blog_name(blog)})
+        res=get_blog_by_slug(blog)
+        return render(request,'blogs/posts.html',{"post":res})
     except Exception:
         res_data=render_to_string("404.html")
         #raise Http404()
@@ -112,5 +118,5 @@ def blog_post(request, blog):
     # else:
     #     return HttpResponse(res)
 
-def blog_post_by_number(request, blog):
-    return HttpResponse(blog)
+# def blog_post_by_number(request, blog):
+#     return HttpResponse(blog)

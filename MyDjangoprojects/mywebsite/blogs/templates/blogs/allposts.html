@@ -15,15 +15,7 @@ All posts
     <h2>ALL MY POSTS!!!!!</h2>
 <ul>
     {% for blog in blogs %}
-    <li>
-        <article>
-            <a href="{% url 'blog-post' blog=blog.slug %}">{{blog.title}}</a>
-            <img src="{% static 'blogs/images/'|add:blog.image %}" alt="{{ blog.title }}"/>
-            <div>
-                <p>{{ blog.preview }}</p>
-            </div>
-        </article>
-    </li>
+    {% include 'blogs/includes/posts.html' %}
     {% endfor %}
 
 </ul>
