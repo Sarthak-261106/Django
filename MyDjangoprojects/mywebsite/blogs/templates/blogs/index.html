@@ -26,26 +26,18 @@ Our blog post home page
      <ul>
           <li>
                <article>
-                    <a href="">
-                         <img src="{% static 'blogs/images/image2.jpg' %}" alt="python"/>
-                         <div>
-                              <h3>Python Intro</h3>
-                              <p>Python is a high level programming language.</p>
-                         </div>
-                    </a>
+                    {% for blog in l_blogs %}
+    <li>
+        <article>
+            <a href="{% url 'blog-post' blog=blog.slug %}">{{blog.title}}</a>
+            <img src="{% static 'blogs/images/'|add:blog.image %}" alt="{{ blog.title }}"/>
+            <div>
+                <p>{{ blog.preview }}</p>
+            </div>
+        </article>
+    </li>
+    {% endfor %}
                </article>
-          </li>
-          <li>
-               <article>
-                    <a href="">
-                         <img src="{% static 'blogs/images/images.jpg' %}" alt="django"/>
-                         <div>
-                              <h3>Django Basics</h3>
-                              <p>Django is web framework in python.</p>
-                         </div>
-                    </a>
-               </article>
-          </li>
      </ul>
 </section>
 

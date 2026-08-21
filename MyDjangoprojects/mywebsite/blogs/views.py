@@ -73,7 +73,9 @@ Because it is simple and included with Python, Tkinter is a good choice for begi
     #           }
 
 def home_page(request):
-    return render(request,'blogs/index.html')
+    sorted_blogs=sorted(blog_details,key=lambda post:post['date'],reverse=True)
+    latest_blogs=sorted_blogs[:2]
+    return render(request,'blogs/index.html',{'l_blogs':latest_blogs})
     # res_data=render_to_string("blogs/index.html")
     # return HttpResponse(res_data)
 
