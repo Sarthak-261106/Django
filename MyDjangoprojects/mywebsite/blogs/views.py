@@ -113,7 +113,8 @@ def blog_post(request, blog):
     try:
         # res=get_blog_by_slug(blog)
         res=Post.objects.get(slug=blog)
-        return render(request,'blogs/posts.html',{"post":res})
+        tags_caption=res.tags.all()
+        return render(request,'blogs/posts.html',{"post":res,'tags':tags_caption})
     except Exception:
         res_data=render_to_string("404.html")
         #raise Http404()
