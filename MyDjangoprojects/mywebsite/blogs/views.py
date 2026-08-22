@@ -3,66 +3,67 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 from django.shortcuts import render
 from datetime import date
+from .models import Post
 
 # Create your views here.
 
-blog_details = [
-    {
-        'slug': 'python-intro',
-        'image': 'image2.jpg',  # Add image here
-        'date': date(2026, 8, 21),
-        'title': 'Python Introduction',
-        'preview': """Python is a powerful, high-level programming language known for its simple and readable syntax.
-It is widely used in web development, data science, artificial intelligence, automation, and software development.""",
-        'content': """Python is a popular high-level programming language known for its simple and easy-to-read syntax.
-It is widely used for web development, automation, data analysis, and artificial intelligence.
-Python provides many built-in libraries and frameworks that make development faster and easier.
-It is beginner-friendly while also being powerful enough for large and complex applications.
-Because of its versatility, Python is one of the most widely used programming languages today."""
-    },
-
-    {
-        'slug': 'django-basics',
-        'image': 'image4.jpg',  # Add image here
-        'date': date(2026, 8, 22),
-        'title': 'Django Basics',
-        'preview': """Django is a powerful Python web framework used to build dynamic and scalable websites.
-It provides built-in features for handling URLs, databases, templates, forms, and user authentication.""",
-        'content': """Django is a popular Python web framework designed for developing secure and maintainable web applications.
-It follows the Model-Template-View architecture, which helps developers organize their applications efficiently.
-Django provides many built-in features such as URL routing, database management, authentication, forms, and templates.
-It also includes an administrative interface that makes managing application data much easier.
-Because of its simplicity and powerful features, Django is widely used for building modern web applications."""
-    },
-
-    {
-        'slug': 'regex',
-        'image': 'image5.jpg',  # Add image here
-        'date': date(2026, 8, 23),
-        'title': 'Regular Expressions',
-        'preview': """Regular expressions, commonly called regex, are patterns used to search, match, and manipulate text.
-They are useful for tasks such as validating input, finding specific patterns, and extracting information.""",
-        'content': """Regular expressions are sequences of characters that define a search pattern for working with text.
-They can be used to find, match, replace, and extract specific patterns from strings.
-Regex provides special characters such as ^, $, *, +, ?, and [] to create powerful search patterns.
-They are commonly used for validating email addresses, phone numbers, passwords, and other forms of input.
-Python provides the built-in re module, which makes it easy to work with regular expressions."""
-    },
-
-    {
-        'slug': 'tkinter',
-        'image': 'image6.jpg',  # Add image here
-        'date': date(2026, 8, 24),
-        'title': 'Tkinter',
-        'preview': """Tkinter is Python's standard library for creating graphical user interfaces and desktop applications.
-It provides widgets such as buttons, labels, text boxes, and menus for building interactive applications.""",
-        'content': """Tkinter is a built-in Python library used to create graphical user interfaces for desktop applications.
-It provides many widgets such as buttons, labels, entry fields, text areas, menus, and frames.
-Developers can use these widgets to create interactive applications without needing external libraries.
-Tkinter also supports event handling, allowing applications to respond to actions such as button clicks.
-Because it is simple and included with Python, Tkinter is a good choice for beginners learning GUI development."""
-    },
-]
+# blog_details = [
+#     {
+#         'slug': 'python-intro',
+#         'image': 'image2.jpg',  # Add image here
+#         'date': date(2026, 8, 21),
+#         'title': 'Python Introduction',
+#         'preview': """Python is a powerful, high-level programming language known for its simple and readable syntax.
+# It is widely used in web development, data science, artificial intelligence, automation, and software development.""",
+#         'content': """Python is a popular high-level programming language known for its simple and easy-to-read syntax.
+# It is widely used for web development, automation, data analysis, and artificial intelligence.
+# Python provides many built-in libraries and frameworks that make development faster and easier.
+# It is beginner-friendly while also being powerful enough for large and complex applications.
+# Because of its versatility, Python is one of the most widely used programming languages today."""
+#     },
+#
+#     {
+#         'slug': 'django-basics',
+#         'image': 'image4.jpg',  # Add image here
+#         'date': date(2026, 8, 22),
+#         'title': 'Django Basics',
+#         'preview': """Django is a powerful Python web framework used to build dynamic and scalable websites.
+# It provides built-in features for handling URLs, databases, templates, forms, and user authentication.""",
+#         'content': """Django is a popular Python web framework designed for developing secure and maintainable web applications.
+# It follows the Model-Template-View architecture, which helps developers organize their applications efficiently.
+# Django provides many built-in features such as URL routing, database management, authentication, forms, and templates.
+# It also includes an administrative interface that makes managing application data much easier.
+# Because of its simplicity and powerful features, Django is widely used for building modern web applications."""
+#     },
+#
+#     {
+#         'slug': 'regex',
+#         'image': 'image5.jpg',  # Add image here
+#         'date': date(2026, 8, 23),
+#         'title': 'Regular Expressions',
+#         'preview': """Regular expressions, commonly called regex, are patterns used to search, match, and manipulate text.
+# They are useful for tasks such as validating input, finding specific patterns, and extracting information.""",
+#         'content': """Regular expressions are sequences of characters that define a search pattern for working with text.
+# They can be used to find, match, replace, and extract specific patterns from strings.
+# Regex provides special characters such as ^, $, *, +, ?, and [] to create powerful search patterns.
+# They are commonly used for validating email addresses, phone numbers, passwords, and other forms of input.
+# Python provides the built-in re module, which makes it easy to work with regular expressions."""
+#     },
+#
+#     {
+#         'slug': 'tkinter',
+#         'image': 'image6.jpg',  # Add image here
+#         'date': date(2026, 8, 24),
+#         'title': 'Tkinter',
+#         'preview': """Tkinter is Python's standard library for creating graphical user interfaces and desktop applications.
+# It provides widgets such as buttons, labels, text boxes, and menus for building interactive applications.""",
+#         'content': """Tkinter is a built-in Python library used to create graphical user interfaces for desktop applications.
+# It provides many widgets such as buttons, labels, entry fields, text areas, menus, and frames.
+# Developers can use these widgets to create interactive applications without needing external libraries.
+# Tkinter also supports event handling, allowing applications to respond to actions such as button clicks.
+# Because it is simple and included with Python, Tkinter is a good choice for beginners learning GUI development."""
+#     },
+#]
 
 
 
@@ -73,14 +74,16 @@ Because it is simple and included with Python, Tkinter is a good choice for begi
     #           }
 
 def home_page(request):
-    sorted_blogs=sorted(blog_details,key=lambda post:post['date'],reverse=True)
-    latest_blogs=sorted_blogs[:2]
+    latest_blogs=Post.objects.all().order_by('-date')[:2]
+    # sorted_blogs=sorted(blog_details,key=lambda post:post['date'],reverse=True)
+    # latest_blogs=sorted_blogs[:2]
     return render(request,'blogs/index.html',{'l_blogs':latest_blogs})
     # res_data=render_to_string("blogs/index.html")
     # return HttpResponse(res_data)
 
 
 def blogposts(request):
+    blog_details=Post.objects.all()
     # list_items=''
 
     return render(request,'blogs/allposts.html',{'blogs':blog_details})
@@ -94,11 +97,11 @@ def process_blog_name(blog):
     blog_list=blog.split("-")
     return " ".join(blog_list)
 
-def get_blog_by_slug(blog_url):
-    for blog in blog_details:
-        if blog['slug']==blog_url:
-            return blog
-    return None
+# def get_blog_by_slug(blog_url):
+#     for blog in blog_details:
+#         if blog['slug']==blog_url:
+#             return blog
+#     return None
 
 
 def blog_post(request, blog):
@@ -108,7 +111,8 @@ def blog_post(request, blog):
     #     res = "django blog posts!"
     # else:
     try:
-        res=get_blog_by_slug(blog)
+        # res=get_blog_by_slug(blog)
+        res=Post.objects.get(slug=blog)
         return render(request,'blogs/posts.html',{"post":res})
     except Exception:
         res_data=render_to_string("404.html")
