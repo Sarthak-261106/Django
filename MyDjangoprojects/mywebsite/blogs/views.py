@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import render
 from datetime import date
 from .models import Post
-
+from .forms import CommentForm
 # Create your views here.
 
 # blog_details = [
@@ -112,9 +112,10 @@ def blog_post(request, blog):
     # else:
     try:
         # res=get_blog_by_slug(blog)
-        res=Post.objects.get(slug=blog)
-        tags_caption=res.tags.all()
-        return render(request,'blogs/posts.html',{"post":res,'tags':tags_caption})
+        post_data=Post.objects.get(slug=blog)
+        tags_caption=post_data.tags.all()
+        form_data=CommentForm()
+        return render(request,'blogs/posts.html',{"post":post_data,'tags':tags_caption,'comment_form':form_data})
     except Exception:
         res_data=render_to_string("404.html")
         #raise Http404()
