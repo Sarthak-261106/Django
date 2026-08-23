@@ -19,6 +19,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.caption
 
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     preview = models.CharField(max_length=250)
@@ -32,5 +33,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
+class Comment(models.Model):
+    user_name= models.CharField(max_length=50)
+    user_email = models.EmailField()
+    comment_text = models.TextField(max_length=400)
+    date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
