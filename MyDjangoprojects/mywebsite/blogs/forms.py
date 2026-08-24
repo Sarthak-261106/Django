@@ -6,4 +6,5 @@ class CommentForm(forms.ModelForm):
         model = Comment
         # fields = ["comment_text","user_name","user_email"]
         exclude = ["post"]
-        
+        labels = {'user_name':"Your Name",'user_email':"Your Email","comment_text":"Your Views"}
+
