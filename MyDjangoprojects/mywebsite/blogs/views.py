@@ -105,33 +105,69 @@ def process_blog_name(blog):
 #             return blog
 #     return None
 
-
 def blog_post(request, blog):
     post_data = Post.objects.get(slug=blog)
     tags_caption = post_data.tags.all()
+    all_comments = post_data.comments.all()
 
-    if request.method=="POST":
+    if request.method == "POST":
         commented_data = request.POST
         form = CommentForm(commented_data)
-        if form.is_valid():
-            comment=form.save(commit=False)
-            comment.post=post_data
-            comment.save()
-            return HttpResponseRedirect(reverse('blog-post',args=[blog]))
-        return render(request, 'blogs/posts.html', {"post": post_data, 'tags': tags_caption, 'comment_form': form})
 
-    # if blog=='python-intro':
-    #     res = "python blog posts!"
-    # elif blog=='django-basics':
-    #     res = "django blog posts!"
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post_data
+            comment.save()
+
+            return HttpResponseRedirect(
+                reverse("blog-post", args=[blog])
+            )
+
     else:
-       try:
-        # res=get_blog_by_slug(blog)
-        form_data=CommentForm()
-        return render(request,'blogs/posts.html',{"post":post_data,'tags':tags_caption,'comment_form':form_data})
-       except Exception:
-        res_data=render_to_string("404.html")
-        #raise Http404()
+        form = CommentForm()
+
+    return render(
+        request,
+        "blogs/posts.html",
+        {
+            "post": post_data,
+            "tags": tags_caption,
+            "comment_form": form,
+            "comments": all_comments,
+        }
+    )
+
+# def blog_post(request, blog):
+#     post_data = Post.objects.get(slug=blog)
+#     tags_caption = post_data.tags.all()
+#     all_comments = post_data.comments.all()
+#
+#     if request.method=="POST":
+#         commented_data = request.POST
+#         form = CommentForm(commented_data)
+#         if form.is_valid():
+#             comment=form.save(commit=False)
+#             comment.post=post_data
+#             comment.save()
+#             return HttpResponseRedirect(reverse('blog-post',args=[blog]))
+#         return render(request, 'blogs/posts.html', {"post": post_data, 'tags': tags_caption, 'comment_form': form , 'comments':all_comments})
+#
+#     # if blog=='python-intro':
+#     #     res = "python blog posts!"
+#     # elif blog=='django-basics':
+#     #     res = "django blog posts!"
+#     else:
+#         form = CommentForm()
+#
+#     return render(request,'blogs/posts.html', {"post": post_data,'tags':tags_caption,'comment_form':form , 'comments':all_comments})
+#
+#        # try:
+#        #  # res=get_blog_by_slug(blog)
+#        #  form_data=CommentForm()
+#        #  return render(request,'blogs/posts.html',{"post":post_data,'tags':tags_caption,'comment_form':form_data, 'comments':all_comments})
+#        # except Exception:
+#        #  res_data=render_to_string("404.html")
+#        #  #raise Http404()
 
 
 

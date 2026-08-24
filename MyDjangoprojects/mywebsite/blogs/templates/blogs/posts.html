@@ -24,6 +24,19 @@
 </main>
 
 <section>
+    <ul>
+        {% for comment in comments %}
+        <li>
+            <h2>{{ comment.user_name }}</h2>
+            <P>{{ comment.comment_text }}</P>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+
+
+<section>
     <h2>Comments</h2>
     <form action="{% url 'blog-post' post.slug %}" method="POST">
         {% csrf_token %}
