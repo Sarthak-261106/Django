@@ -1,3 +1,4 @@
+from django.db.models import Model
 from django.http import HttpResponse,HttpResponseNotFound,Http404,HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
@@ -113,7 +114,9 @@ def blog_post(request, blog):
         commented_data = request.POST
         form = CommentForm(commented_data)
         if form.is_valid():
-            form.save()
+            comment=form.save(commit=False)
+            comment.post=post_data
+            comment.save()
             return HttpResponseRedirect(reverse('blog-post',args=[blog]))
         return render(request, 'blogs/posts.html', {"post": post_data, 'tags': tags_caption, 'comment_form': form})
 
